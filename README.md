@@ -6,7 +6,19 @@
 
 Unofficial Chrome / Edge extension for the [original game](https://pokesurvivor.com/), with custom bindings, a guided setup wizard and stick calibration. Maintained independently from the game.
 
-[Features](#features) · [Installation](#installation) · [Controls](#controls) · [Privacy and security](#privacy-and-security) · [Developer guide](docs/dev.md) · [License and disclaimer](#license-and-disclaimer)
+[Installation](#installation) · [Features](#features) · [Controls](#controls) · [Privacy and security](#privacy-and-security) · [Developer guide](docs/dev.md) · [License and disclaimer](#license-and-disclaimer)
+
+[Download the extension ZIP](https://github.com/Max-FullTek/pokesurvivor-gamepad-extension/releases/latest) · [Installation](#installation)
+
+## Installation
+
+1. Open [Releases](https://github.com/Max-FullTek/pokesurvivor-gamepad-extension/releases/latest) and download **PokeSurvivor-Gamepad-v0.6.10.zip** under **Assets**. Extract it to a permanent folder. The automatically generated **Source code (zip)** / **Download ZIP** archives contain source code and must be [built first](docs/dev.md).
+2. Open `chrome://extensions` or `edge://extensions` and enable **Developer mode**.
+3. Choose **Load unpacked**, then select the extracted `controller-extension` folder containing `manifest.json`.
+4. Open or refresh [PokéSurvivor](https://pokesurvivor.com/). Connect a gamepad and press a button.
+5. Open **Settings → Controls → On PC → Controller → Gamepad settings** in the game. Use the toolbar popup for the enable switch and interface language.
+
+Keep the extracted folder in place while the extension is installed. For updates, download the new release, replace the files in that folder, reload the extension on the extensions page, and refresh the game tab. Updates are installed manually. To stop using it, turn off the toolbar switch or disable / remove the extension in the browser.
 
 ## Features
 
@@ -16,16 +28,6 @@ Unofficial Chrome / Edge extension for the [original game](https://pokesurvivor.
 - Toolbar toggle to disable gamepad support while keeping your settings.
 
 > Interface language affects this extension only. Traditional Chinese game text requires the separate [translation extension](https://github.com/q86865511/pokesurvivor-zh-hant/tree/main/pokesurvivor-zh-ext), which is not bundled here.
-
-## Installation
-
-1. Extract a provided extension ZIP, or [build from source](docs/dev.md). GitHub's **Download ZIP** contains source code and must be built first.
-2. Open `chrome://extensions` or `edge://extensions` and enable **Developer mode**.
-3. Choose **Load unpacked**, then select the built `controller-extension` folder containing `manifest.json`. For a source build, this is `dist/controller-extension`.
-4. Open or refresh [PokéSurvivor](https://pokesurvivor.com/). Connect a gamepad and press a button.
-5. Open **Settings → Controls → On PC → Controller → Gamepad settings** in the game. Use the toolbar popup for the enable switch and interface language.
-
-After updating, reload the extension on the extensions page and refresh the game tab. To stop using it, turn off the toolbar switch or disable / remove the extension in the browser.
 
 ## Controls
 

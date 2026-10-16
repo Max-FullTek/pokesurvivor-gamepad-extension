@@ -6,7 +6,19 @@
 
 Extensión no oficial para Chrome / Edge y el [juego original](https://pokesurvivor.com/), con asignaciones personalizadas, un asistente de configuración y calibración de sticks. Se mantiene de forma independiente del juego.
 
-[Funciones](#funciones) · [Instalación](#instalación) · [Controles](#controles) · [Privacidad y seguridad](#privacidad-y-seguridad) · [Guía para desarrolladores](docs/dev.es.md) · [Licencia y exención de responsabilidad](#licencia-y-exención-de-responsabilidad)
+[Instalación](#instalación) · [Funciones](#funciones) · [Controles](#controles) · [Privacidad y seguridad](#privacidad-y-seguridad) · [Guía para desarrolladores](docs/dev.es.md) · [Licencia y exención de responsabilidad](#licencia-y-exención-de-responsabilidad)
+
+[Descargar el ZIP de la extensión](https://github.com/Max-FullTek/pokesurvivor-gamepad-extension/releases/latest) · [Instalación](#instalación)
+
+## Instalación
+
+1. Abre [Releases](https://github.com/Max-FullTek/pokesurvivor-gamepad-extension/releases/latest) y descarga **PokeSurvivor-Gamepad-v0.6.10.zip** en **Assets**. Extráelo en una carpeta permanente. Los archivos automáticos **Source code (zip)** / **Download ZIP** contienen código fuente y requieren [compilación previa](docs/dev.es.md).
+2. Abre `chrome://extensions` o `edge://extensions` y activa el **Modo de desarrollador**.
+3. Selecciona **Cargar descomprimida** y elige la carpeta extraída `controller-extension` que contiene `manifest.json`.
+4. Abre o recarga [PokéSurvivor](https://pokesurvivor.com/). Conecta un mando y pulsa un botón.
+5. En el juego, abre **Ajustes → Controles → En PC → Mando → Configurar mando**. El panel de la barra de extensiones permite activar el mando y elegir el idioma.
+
+Conserva la carpeta extraída mientras la extensión esté instalada. Para actualizar, descarga la nueva versión, reemplaza los archivos de esa carpeta, recarga la extensión desde la página de extensiones y luego la pestaña del juego. Las actualizaciones se instalan manualmente. Para dejar de usarla, desactiva el interruptor o deshabilita / elimina la extensión en el navegador.
 
 ## Funciones
 
@@ -16,16 +28,6 @@ Extensión no oficial para Chrome / Edge y el [juego original](https://pokesurvi
 - Interruptor en la barra de extensiones para desactivar el mando sin perder la configuración.
 
 > El idioma solo afecta a esta extensión. Para traducir el juego al chino tradicional se necesita la [extensión de traducción](https://github.com/q86865511/pokesurvivor-zh-hant/tree/main/pokesurvivor-zh-ext), que se distribuye por separado.
-
-## Instalación
-
-1. Extrae un ZIP de la extensión o [compila el código fuente](docs/dev.es.md). **Download ZIP** de GitHub contiene código fuente y requiere compilación.
-2. Abre `chrome://extensions` o `edge://extensions` y activa el **Modo de desarrollador**.
-3. Selecciona **Cargar descomprimida** y elige la carpeta compilada `controller-extension` que contiene `manifest.json`. Al compilar desde el código fuente, es `dist/controller-extension`.
-4. Abre o recarga [PokéSurvivor](https://pokesurvivor.com/). Conecta un mando y pulsa un botón.
-5. En el juego, abre **Ajustes → Controles → En PC → Mando → Configurar mando**. El panel de la barra de extensiones permite activar el mando y elegir el idioma.
-
-Tras actualizar, recarga la extensión desde la página de extensiones y luego la pestaña del juego. Para dejar de usarla, desactiva el interruptor o deshabilita / elimina la extensión en el navegador.
 
 ## Controles
 

@@ -6,7 +6,19 @@
 
 適用於[原作者遊戲網站](https://pokesurvivor.com/)的非官方 Chrome／Edge 擴充元件，提供自訂按鍵、設定精靈與搖桿校正，由社群獨立維護。
 
-[功能](#功能) · [安裝](#安裝) · [操作](#操作) · [隱私與安全](#隱私與安全) · [開發者指南](docs/dev.zh-Hant.md) · [授權與免責聲明](#授權與免責聲明)
+[安裝](#安裝) · [功能](#功能) · [操作](#操作) · [隱私與安全](#隱私與安全) · [開發者指南](docs/dev.zh-Hant.md) · [授權與免責聲明](#授權與免責聲明)
+
+[下載擴充元件 ZIP](https://github.com/Max-FullTek/pokesurvivor-gamepad-extension/releases/latest) · [安裝方式](#安裝)
+
+## 安裝
+
+1. 開啟 [Releases](https://github.com/Max-FullTek/pokesurvivor-gamepad-extension/releases/latest)，在 **Assets** 下載 **PokeSurvivor-Gamepad-v0.6.10.zip**，解壓縮至固定資料夾。GitHub 自動產生的 **Source code (zip)**／**Download ZIP** 是原始碼，需先依[開發者指南建置](docs/dev.zh-Hant.md)。
+2. 開啟 `chrome://extensions` 或 `edge://extensions`，啟用「開發人員模式」。
+3. 選擇「載入解壓縮擴充功能」，指定解壓縮後含 `manifest.json` 的 `controller-extension` 資料夾。
+4. 開啟或重新整理 [PokéSurvivor](https://pokesurvivor.com/)，連接手把並按一下按鈕。
+5. 在遊戲「設定 → 操作 → 電腦 → 手把操作 → 手把設定」開啟設定。啟用開關與介面語言位於擴充元件工具列選單。
+
+安裝後請保留解壓縮資料夾。更新時，下載新版並替換同一資料夾的檔案，先在擴充功能頁重新載入元件，再重整遊戲頁面；更新需手動安裝。不使用時可關閉工具列開關，或在瀏覽器停用／移除元件。
 
 ## 功能
 
@@ -16,16 +28,6 @@
 - 工具列開關可停用手把支援，並保留設定。
 
 > 語言選擇只影響本擴充元件。遊戲顯示繁體中文需另裝[繁中翻譯擴充元件](https://github.com/q86865511/pokesurvivor-zh-hant/tree/main/pokesurvivor-zh-ext)，本專案未內附翻譯元件。
-
-## 安裝
-
-1. 解壓縮取得的擴充元件 ZIP，或[從原始碼建置](docs/dev.zh-Hant.md)。GitHub 的 **Download ZIP** 是原始碼，需先建置。
-2. 開啟 `chrome://extensions` 或 `edge://extensions`，啟用「開發人員模式」。
-3. 選擇「載入解壓縮擴充功能」，指定建置後含 `manifest.json` 的 `controller-extension` 資料夾。自行建置時，位置為 `dist/controller-extension`。
-4. 開啟或重新整理 [PokéSurvivor](https://pokesurvivor.com/)，連接手把並按一下按鈕。
-5. 在遊戲「設定 → 操作 → 電腦 → 手把操作 → 手把設定」開啟設定。啟用開關與介面語言位於擴充元件工具列選單。
-
-更新後，先在擴充功能頁重新載入元件，再重整遊戲頁面。不使用時可關閉工具列開關，或在瀏覽器停用／移除元件。
 
 ## 操作
 
