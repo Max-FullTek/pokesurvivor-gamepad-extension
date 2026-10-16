@@ -1,0 +1,131 @@
+/* Controller editor: shared by the native game and the isolated extension. */
+#ps-gamepad-dialog { position:fixed; inset:0; z-index:95; display:flex; align-items:center; justify-content:center; padding:16px; box-sizing:border-box; background:#060b18cc; color:#edf3ff; font:15px/1.5 var(--font,system-ui),sans-serif; }
+#ps-gamepad-dialog.hidden { display:none!important; }
+#ps-gamepad-dialog * { box-sizing:border-box; }
+#ps-gamepad-dialog .ps-pad-card { display:flex; flex-direction:column; width:min(700px,100%); max-height:94dvh; overflow:auto; gap:6px; padding:14px 18px; background:linear-gradient(180deg,var(--box1,#3f5297),var(--box2,#29376d)); border:3px solid var(--edge,#b6cbff); border-radius:12px; box-shadow:0 0 0 3px var(--edge-out,#0a1430),inset 0 0 0 2px var(--edge-in,#ffffff33),0 18px 50px #0008; }
+#ps-gamepad-dialog header { display:flex; justify-content:space-between; align-items:flex-start; flex-shrink:0; flex-wrap:wrap; gap:12px; }
+#ps-gamepad-dialog h2 { margin:0; font-size:20px; color:#fff; }
+#ps-gamepad-dialog p { margin:3px 0; font-size:12px; }
+#ps-gamepad-dialog header .ps-pad-subtitle { margin:3px 0 0; color:var(--muted,#c5d0ef); font-size:12px; line-height:1.4; }
+#ps-gamepad-dialog button { font:inherit; background:#253751; color:#f5f8ff; border:1px solid #61728b; border-radius:9px; padding:8px 14px; cursor:pointer; line-height:1.4; }
+#ps-gamepad-dialog button:focus-visible, #ps-gamepad-dialog input:focus-visible { outline:3px solid #9cddff; outline-offset:3px; }
+#ps-gamepad-dialog button:disabled { opacity:.4; cursor:default; }
+#ps-gamepad-dialog input { accent-color:#70cebe; }
+#ps-gamepad-dialog button.btn { border:3px solid var(--edge,#b6cbff); border-radius:9px; background:linear-gradient(180deg,#3d67c0,#26468f); box-shadow:0 0 0 2px var(--edge-out,#0a1430),0 4px 0 var(--edge-out,#0a1430); font-weight:700; text-shadow:2px 2px 0 var(--shadow,#0a1430); }
+#ps-gamepad-dialog button.btn.danger { background:#8a1f2e; border-color:#ff8a96; }
+#ps-gamepad-dialog button.btn.ghost { background:transparent; box-shadow:none; border-color:rgba(244,248,255,.35); }
+#ps-gamepad-dialog .ps-pad-header-actions { display:flex; gap:10px; align-items:center; margin-left:auto; padding-top:2px; }
+#ps-gamepad-dialog .ps-pad-header-actions button { font-size:12px; white-space:nowrap; }
+
+/* Artwork and fixed hit targets share the same SVG coordinate system. */
+#ps-gamepad-dialog .ps-pad-diagram-frame { position:relative; flex:none; min-height:0; display:flex; flex-direction:column; gap:8px; }
+#ps-gamepad-dialog [data-pad-picture] { flex:none; min-height:0; height:clamp(260px,48vh,460px); }
+#ps-gamepad-dialog .ps-pad-diagram { display:block; width:100%; height:100%; min-height:0; max-height:none; margin:0; overflow:hidden; }
+#ps-gamepad-dialog .ps-pad-art { pointer-events:none; opacity:.16; fill:#edf3fa; }
+#ps-gamepad-dialog .ps-pad-target { cursor:pointer; outline:none; }
+#ps-gamepad-dialog .ps-pad-direct-hit { fill:#253d79; stroke:#b6c8f0; stroke-width:1.5; transition:fill .07s,stroke .07s; }
+#ps-gamepad-dialog .ps-pad-direct:focus-visible .ps-pad-direct-hit { stroke-width:3; }
+#ps-gamepad-dialog .ps-pad-direct:hover .ps-pad-direct-hit,
+#ps-gamepad-dialog .ps-pad-direct:focus .ps-pad-direct-hit { stroke:var(--gold,#ffd23f); fill:#405ba2; }
+#ps-gamepad-dialog .ps-pad-direct.is-pressed .ps-pad-direct-hit { fill:#9a7928; stroke:#ffd23f; }
+#ps-gamepad-dialog .ps-pad-direct-name { display:block; fill:#fff; font:700 12px system-ui; text-anchor:middle; pointer-events:none; }
+#ps-gamepad-dialog .ps-pad-long-name .ps-pad-direct-name { font-size:7px; }
+#ps-gamepad-dialog .ps-pad-stick-dot { fill:#72cebd; pointer-events:none; }
+#ps-gamepad-dialog .ps-pad-function-label,
+#ps-gamepad-dialog .ps-pad-mode-label { pointer-events:none; overflow:visible; }
+#ps-gamepad-dialog .ps-pad-direct .ps-pad-chip { display:flex; align-items:center; justify-content:center; width:100%; height:20px; min-width:0; padding:0; margin:0; border:1px solid #ffd23f80; border-radius:5px; background:#263c75; color:var(--gold,#ffd23f); font:600 12px/1.15 system-ui; }
+#ps-gamepad-dialog .ps-pad-assigned { font:inherit; white-space:normal; overflow-wrap:normal; }
+#ps-gamepad-dialog .ps-pad-direct.is-pressed .ps-pad-chip { color:#fff4be; }
+#ps-gamepad-dialog .ps-pad-direct .ps-pad-mode-chip { white-space:nowrap; font-size:11px; }
+#ps-gamepad-dialog .ps-pad-label-link { display:none; fill:none; stroke:#ffd23f; stroke-width:1.5; opacity:.82; stroke-linecap:square; stroke-linejoin:miter; pointer-events:none; }
+#ps-gamepad-dialog .ps-pad-label-link.is-assigned { display:block; }
+#ps-gamepad-dialog .ps-pad-context { order:-1; display:flex; justify-content:center; gap:6px; margin:0; padding:8px 0 12px; border-bottom:1px solid #ffffff20; white-space:nowrap; }
+#ps-gamepad-dialog .ps-pad-context button.gen-tab { appearance:none; flex:0 0 auto; display:flex; align-items:center; justify-content:center; min-width:92px; line-height:1.1; padding:6px 12px; border-radius:9px; background:rgba(0,0,0,.25); border:2px solid rgba(244,248,255,.22); color:var(--ink,#fff); font-size:13px; font-weight:inherit; text-shadow:2px 2px 0 var(--shadow,#0a1430); box-shadow:none; }
+#ps-gamepad-dialog .ps-pad-context button.gen-tab.on { border-color:var(--gold,#ffd23f); background:rgba(255,210,63,.14); }
+#ps-gamepad-dialog .ps-pad-wizard-launch { position:absolute; right:8px; bottom:8px; }
+
+/* Calibration and save controls. */
+#ps-gamepad-dialog .ps-pad-stick-row { display:flex; align-items:center; gap:14px; border-top:1px solid #ffffff20; padding:8px 0 2px; }
+#ps-gamepad-dialog .ps-pad-stick-row > button { flex-shrink:0; font-size:14px; }
+#ps-gamepad-dialog .ps-pad-range { display:flex; flex:1; align-items:center; gap:10px; flex-wrap:wrap; margin:0; font-size:12px; white-space:nowrap; }
+#ps-gamepad-dialog .ps-pad-range input { flex:1; min-width:50px; width:auto; }
+#ps-gamepad-dialog .ps-pad-range output { min-width:35px; }
+#ps-gamepad-dialog .ps-pad-card > footer { position:static; display:flex; align-items:center; justify-content:flex-end; flex-shrink:0; flex-wrap:wrap; gap:12px; margin:0; padding:5px 0 3px; border:0; background:transparent; }
+#ps-gamepad-dialog footer > button { flex-shrink:0; }
+#ps-gamepad-dialog footer .ps-pad-message { display:block; visibility:hidden; flex:1; min-width:0; height:36px; min-height:36px; margin:0; color:#a5e5d4; font-size:12px; line-height:18px; overflow:auto; }
+#ps-gamepad-dialog footer .ps-pad-message:not(:empty) { visibility:visible; }
+#ps-gamepad-dialog .ps-pad-message.is-error { color:#ffcb8e; }
+
+/* Function picker and setup wizard. */
+#ps-gamepad-dialog .ps-pad-picker[hidden] { display:none; }
+#ps-gamepad-dialog .ps-pad-picker { position:fixed; inset:0; z-index:120; display:flex; align-items:center; justify-content:center; background:#060b1899; padding:20px; }
+#ps-gamepad-dialog .ps-pad-picker-card { position:relative; width:min(520px,100%); max-height:85dvh; overflow:auto; padding:20px; background:linear-gradient(180deg,var(--box1,#3f5297),var(--box2,#29376d)); }
+#ps-gamepad-dialog .ps-pad-picker-card > h3 { margin:0; padding-right:30px; }
+#ps-gamepad-dialog .ps-pad-picker button.ps-pad-picker-close { position:absolute; right:12px; top:12px; display:grid; place-items:center; width:28px; height:28px; margin:0; padding:4px; border:0; border-radius:5px; background:transparent; box-shadow:none; }
+#ps-gamepad-dialog .ps-pad-picker-close:hover { background:#ffffff16; }
+#ps-gamepad-dialog .ps-pad-picker button.chip { appearance:none; padding:4px 10px; border-radius:20px; background:rgba(0,0,0,.25); border:2px solid rgba(244,248,255,.25); font-size:13px; color:var(--ink,#fff); text-shadow:1px 1px 0 var(--shadow,#0a1430); box-shadow:none; }
+#ps-gamepad-dialog .ps-pad-picker button.chip.on { border-color:var(--gold,#ffd23f); color:var(--gold,#ffd23f); }
+#ps-gamepad-dialog .ps-pad-options { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-top:14px; }
+#ps-gamepad-dialog .ps-pad-option-group { display:flex; flex-direction:column; gap:8px; }
+#ps-gamepad-dialog .ps-pad-option-group button.chip { min-height:34px; padding:5px 7px; line-height:1.25; }
+#ps-gamepad-dialog .ps-pad-movement-options { grid-column:1 / -1; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); align-items:center; gap:8px; }
+#ps-gamepad-dialog .ps-pad-movement-options strong { grid-column:1 / -1; color:var(--muted,#c5d0ef); font-size:12px; font-weight:600; }
+#ps-gamepad-dialog .ps-pad-stick-mode { margin:16px 0 0; padding:0 0 12px; border-bottom:1px solid #ffffff24; }
+#ps-gamepad-dialog .ps-pad-stick-mode > strong { display:block; margin-bottom:8px; color:var(--ink,#fff); font-size:14px; }
+#ps-gamepad-dialog .ps-pad-stick-mode-options { display:flex; flex-wrap:wrap; gap:7px; }
+#ps-gamepad-dialog .ps-pad-stick-press-heading { margin:12px 0 0; color:var(--ink,#fff); font-size:13px; }
+#ps-gamepad-dialog .ps-pad-wizard-card { width:min(480px,calc(100vw - 40px)); }
+#ps-gamepad-dialog .ps-pad-wizard-heading { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:8px; }
+#ps-gamepad-dialog .ps-pad-wizard-heading h3 { margin:0; }
+#ps-gamepad-dialog .ps-pad-wizard-progress { display:flex; align-items:center; justify-content:center; gap:8px; color:#acbddd; font-size:12px; }
+#ps-gamepad-dialog .ps-pad-wizard-progress .is-current { color:#ffda48; font-weight:bold; }
+#ps-gamepad-dialog .ps-pad-wizard-body { display:grid; grid-template-columns:1fr; gap:0; align-items:center; margin-top:20px; }
+#ps-gamepad-dialog .ps-pad-wizard-body > div:first-child { text-align:center; }
+#ps-gamepad-dialog .ps-pad-wizard-step { color:#b6c7eb; font-size:20px; }
+#ps-gamepad-dialog .ps-pad-wizard-card h4 { font-size:28px; margin:6px 0 0; }
+#ps-gamepad-dialog [data-wizard-mode]:focus { outline:2px solid #ffdb4d; outline-offset:2px; }
+#ps-gamepad-dialog .ps-pad-wizard-body [data-wizard-prompt] { text-align:center; color:#ffda48; font-size:16px; line-height:1.5; margin:12px 0 20px; }
+#ps-gamepad-dialog .ps-pad-wizard-body .ps-pad-stick-mode-options { justify-content:center; }
+#ps-gamepad-dialog .ps-pad-wizard-inputs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); width:100%; max-width:400px; justify-self:center; gap:20px 8px; }
+#ps-gamepad-dialog .ps-pad-wizard-input-row { display:flex; flex-direction:column; align-items:center; min-width:0; }
+#ps-gamepad-dialog .ps-pad-wizard-inputs button.chip { min-width:0; width:52px; height:34px; flex:0 0 34px; border-radius:999px; padding:0; font-size:13px; }
+#ps-gamepad-dialog .ps-pad-wizard-input-row span { display:block; position:relative; z-index:1; margin-top:-3px; width:max-content; min-width:64px; max-width:100%; min-height:24px; text-align:center; padding:3px 5px; border:1px solid #829bc2; border-radius:5px; background:#243e72; color:#ffda48; font-size:13px; line-height:1.3; overflow-wrap:anywhere; }
+#ps-gamepad-dialog .ps-pad-wizard-input-row span:empty { visibility:hidden; }
+#ps-gamepad-dialog .ps-pad-wizard-inputs button.chip.is-assigned { opacity:1; background:#ffda48; color:#203567; border-color:#fff0a3; text-shadow:none; box-shadow:0 0 16px #ffd84caa; animation:ps-pad-wizard-assigned .5s ease-in-out; }
+#ps-gamepad-dialog .ps-pad-wizard-inputs button.chip.is-conflict { background:#d83c4b; color:#fff; border-color:#ffb2bb; text-shadow:none; box-shadow:0 0 16px #ed405b99; animation:ps-pad-wizard-assigned .5s ease-in-out; }
+@keyframes ps-pad-wizard-assigned { 0%,100% {transform:scale(1.06) rotate(0)} 25%,65% {transform:scale(1.1) rotate(-4deg)} 45%,85% {transform:scale(1.1) rotate(4deg)} }
+@media (prefers-reduced-motion:reduce) {
+  #ps-gamepad-dialog .ps-pad-wizard-inputs button.chip.is-assigned,
+  #ps-gamepad-dialog .ps-pad-wizard-inputs button.chip.is-conflict { animation:none; }
+}
+
+/* Controls summary in the game's Settings panel. */
+.ps-controls-subhead { font-size:inherit; margin:10px 0 7px; }
+.ps-controls-content { display:flex; align-items:flex-start; gap:16px; }
+.ps-controls-group { border-top:1px solid #ffffff20; margin-top:12px; padding-top:3px; }
+.ps-controls-content [data-pad-controls-summary] { flex:1; min-width:0; }
+.ps-controls-content > button { flex-shrink:0; margin-top:-5px; }
+#set-body:has(.ps-controls-group) > .keys,
+#set-body .ps-controls-group .keys { grid-template-columns:minmax(0,168px) minmax(0,1fr); }
+#set-body .ps-controls-group .keys > div { min-width:0; overflow-wrap:anywhere; }
+@media (max-width:600px) {
+  #ps-gamepad-dialog { padding:6px; }
+  #ps-gamepad-dialog .ps-pad-card { width:100%; padding:16px; }
+  #ps-gamepad-dialog header { gap:8px; }
+  #ps-gamepad-dialog .ps-pad-header-actions { gap:7px; }
+  #ps-gamepad-dialog .ps-pad-header-actions button { font-size:10px; padding:5px 7px; }
+  #ps-gamepad-dialog [data-pad-picture] { height:clamp(220px,40vh,340px); }
+  #ps-gamepad-dialog .ps-pad-direct .ps-pad-chip { font-size:10px; }
+  .ps-controls-content { flex-wrap:wrap; }
+}
+@media (max-width:540px) {
+  #ps-gamepad-dialog .ps-pad-wizard-heading { grid-template-columns:1fr; gap:10px; }
+}
+@media (max-width:480px) { #ps-gamepad-dialog .ps-pad-options { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:420px) { #ps-gamepad-dialog .ps-pad-wizard-inputs { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-height:550px) {
+  #ps-gamepad-dialog .ps-pad-card { height:auto; max-height:96dvh; padding:8px 12px; gap:6px; }
+  #ps-gamepad-dialog h2 { font-size:16px; }
+  #ps-gamepad-dialog [data-pad-picture] { height:34vh; }
+  #ps-gamepad-dialog .ps-pad-stick-row { padding-top:4px; }
+}

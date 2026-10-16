@@ -1,0 +1,19 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local settings and credentials are not part of the public source.
+.env
+.env.*
+!.env.example
+.npmrc
+*.pem
+*.key
+*.p12
+*.pfx
+.vscode/
+.idea/
+*.code-workspace

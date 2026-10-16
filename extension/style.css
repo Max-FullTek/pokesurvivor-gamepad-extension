@@ -1,0 +1,2 @@
+.pad-focus { outline: 3px solid #ffd23f !important; outline-offset: 3px; }
+#ps-gamepad-dialog select, #ps-gamepad-dialog input, #ps-gamepad-dialog button { font: inherit; }

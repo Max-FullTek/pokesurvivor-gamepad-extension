@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "PokéSurvivor Gamepad Extension",
+  "version": "0.6.10",
+  "permissions": ["storage"],
+  "description": "Gamepad support and custom bindings for PokéSurvivor. 為 PokéSurvivor 提供手把支援與自訂按鍵的擴充元件。",
+  "action": {
+    "default_title": "PokéSurvivor Gamepad Extension · 手把擴充元件",
+    "default_popup": "popup.html",
+    "default_icon": { "16": "icon-16.png", "32": "icon-32.png" }
+  },
+  "icons": { "16": "icon-16.png", "32": "icon-32.png", "48": "icon-48.png", "128": "icon-128.png" },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://pokesurvivor.com/*",
+        "https://www.pokesurvivor.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "world": "ISOLATED",
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
+}

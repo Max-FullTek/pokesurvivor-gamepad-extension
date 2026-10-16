@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PokéSurvivor Gamepad Extension</title>
+  <link rel="stylesheet" href="popup.css">
+  <script defer src="popup.js"></script>
+</head>
+<body>
+  <header>
+    <div class="heading-row">
+      <h1><img src="icon-48.png" width="32" height="32" alt=""><span>PokéSurvivor<span class="product-type">Gamepad Extension</span></span></h1>
+      <label class="gamepad-toggle"><span data-i18n="gamepad">Gamepad</span><input id="gamepad-enabled" type="checkbox" role="switch" aria-label="Enable gamepad" disabled></label>
+    </div>
+    <p data-i18n="links">Related links</p>
+  </header>
+  <label class="language-row"><span data-i18n="language">Language</span><select id="interface-language" disabled>
+    <option value="auto" data-i18n="auto">Automatic (game)</option><option value="en">English</option><option value="es">Español</option><option value="zh-Hant">繁體中文</option>
+  </select></label>
+  <p id="toggle-status" role="status" hidden></p>
+  <nav aria-label="Related links">
+    <a href="https://pokesurvivor.com/" target="_blank" rel="noopener noreferrer">
+      <strong><span data-i18n="game">Original game website</span><span aria-hidden="true">↗</span></strong>
+      <small>pokesurvivor.com</small>
+    </a>
+    <a href="https://github.com/JPTER78/pokesurvivor" target="_blank" rel="noopener noreferrer">
+      <strong><span data-i18n="originalRepo">Original game GitHub</span><span aria-hidden="true">↗</span></strong>
+      <small>JPTER78 / pokesurvivor</small>
+    </a>
+    <a href="https://github.com/q86865511/pokesurvivor-zh-hant/tree/main/pokesurvivor-zh-ext" target="_blank" rel="noopener noreferrer">
+      <strong><span data-i18n="chinese">Traditional Chinese extension</span><span aria-hidden="true">↗</span></strong>
+      <small>q86865511 / pokesurvivor-zh-hant</small>
+    </a>
+    <a href="https://github.com/Max-FullTek/pokesurvivor-gamepad-extension" target="_blank" rel="noopener noreferrer">
+      <strong><span data-i18n="ourRepo">Gamepad extension GitHub</span><span aria-hidden="true">↗</span></strong>
+      <small>Max-FullTek / pokesurvivor-gamepad-extension</small>
+    </a>
+  </nav>
+  <p class="language-note" data-i18n="note">Language applies to this extension only. Chinese game text requires the Traditional Chinese extension.</p>
+</body>
+</html>
